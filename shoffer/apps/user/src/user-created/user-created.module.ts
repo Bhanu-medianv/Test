@@ -7,10 +7,29 @@ import { CreateCommand } from './commands/commands.handler';
 import { User } from './entities/user-created.entity';
 import { QueryIMPL } from './queries/queries.impl';
 import { Queryhand } from './queries/queries.handler';
+import { ClientsModule, Transport } from '@nestjs/microservices';
+import { join } from 'path';
+import { CacheModule } from '@nestjs/cache-manager';
+import { UserSession } from './entities/user.session.rename';
+import { UserSessionHandler } from './commands/session.handler';
 
 @Module({
-  imports:[CqrsModule.forRoot(),TypeOrmModule.forFeature([User])],
+  imports:[CqrsModule.forRoot(),TypeOrmModule.forFeature([User,UserSession]),
+  ClientsModule.register([
+      {
+        name : 'User',
+        transport:Transport.GRPC,
+        options:{
+          url:'localhost:3000',
+          package:'user',
+          protoPath:join(__dirname , '../../../../shoffer/libs/assets/protos/user/user.proto'),
+      
+        }
+        
+      }
+    ]),CacheModule.register()
+],
   controllers: [UserCreatedController],
-  providers: [UserCreatedService,CreateCommand ,Queryhand],
+  providers: [UserCreatedService,CreateCommand ,Queryhand,UserSessionHandler],
 })
 export class UserCreatedModule {}

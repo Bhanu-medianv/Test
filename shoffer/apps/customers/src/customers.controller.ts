@@ -6,7 +6,8 @@ export class CustomersController {
   constructor(private readonly customersService: CustomersService) {}
 
   @Get()
-  getHello(): string {
+  getHello(): Promise<any>{
     return this.customersService.getHello();
   }
+  
 }

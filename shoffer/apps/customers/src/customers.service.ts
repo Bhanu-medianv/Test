@@ -1,8 +1,19 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
+import { response } from 'express';
+import { ReqRes } from 'scripts/ReqRes.script';
 
 @Injectable()
 export class CustomersService {
-  getHello(): string {
-    return 'Hello World!';
+  async getHello(): Promise<any>{
+    const response = await ReqRes(
+  "GET",
+  "http://localhost:3001/user"
+  );
+  console.log(response)
+  if(!response){
+    throw new NotFoundException('no response found')
   }
+  return response
+  }
+  
 }

@@ -1,14 +1,15 @@
 {
   "compilerOptions": {
-    "module": "commonjs",
-    "declaration": true,
-    "removeComments": true,
-    "emitDecoratorMetadata": true,
-    "experimentalDecorators": true,
+    "target": "ES2023",                        // Modern JS output
+    "module": "commonjs",                      // For Node.js compatibility
+    "moduleResolution": "node",                // Resolve modules like Node.js does
+    "declaration": true,                       // Generate .d.ts files
+    "removeComments": true,                    // Clean output
+    "emitDecoratorMetadata": true,             // Needed for NestJS
+    "experimentalDecorators": true,            // Needed for NestJS
     "allowSyntheticDefaultImports": true,
-    "target": "ES2023",
     "sourceMap": true,
-    "outDir": "./dist",
+    "outDir": "./dist",                        // Output directory
     "baseUrl": "./",
     "incremental": true,
     "skipLibCheck": true,
@@ -17,19 +18,25 @@
     "noImplicitAny": false,
     "strictBindCallApply": false,
     "noFallthroughCasesInSwitch": false,
+
+    // ✅ Add paths for custom aliasing if needed
     "paths": {
-      "@app/assets": [
-        "libs/assets/src"
-      ],
-      "@app/assets/*": [
-        "libs/assets/src/*"
-      ]
-    }
+      "@app/assets": ["libs/assets/src"],
+      "@app/assets/*": ["libs/assets/src/*"]
+    },
+
+    // ✅ Required for Node built-in modules
+    "types": ["node"]
   },
+
+  // ✅ Includes scripts, apps, and libs
   "include": [
     "apps/**/*",
-    "libs/**/*"
+    "libs/**/*",
+    "scripts/**/*"
   ],
+
+  // ✅ Always exclude node_modules and build output
   "exclude": [
     "node_modules",
     "dist"

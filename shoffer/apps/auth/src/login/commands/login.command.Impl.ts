@@ -1,5 +1,5 @@
-import { CreateLoginDto } from "../dto/create-login.dto";
+import { UserAuthDto } from "../dto/UserAuthDto";
 
 export class LoginCommandImpl{
-    constructor(LoginInfo:CreateLoginDto){}
+    constructor(public readonly userInfo:UserAuthDto){}
 }
