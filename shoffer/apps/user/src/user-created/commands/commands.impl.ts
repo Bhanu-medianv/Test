@@ -1,5 +1,5 @@
-import { CreateUserCreatedDto } from "../dto/create-user-created.dto";
-import { UserSessionDto } from "../dto/create.session.dto";
+import { CreateUserCreatedDto } from "../../../../../libs/assets/dtos/user.dto/create-user-created.dto";
+import { UserSessionDto } from "../../../../../libs/assets/dtos/user.dto/create.session.dto";
 
 export class UserCommand{
     constructor(

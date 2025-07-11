@@ -28,7 +28,7 @@ export interface CreateUserRequest {
 }
 
 export interface CreateUserResponse {
-  userId: number;
+  userId: string;
   name: string;
   email: string;
   password: string;
@@ -127,13 +127,13 @@ export const CreateUserRequest: MessageFns<CreateUserRequest> = {
 };
 
 function createBaseCreateUserResponse(): CreateUserResponse {
-  return { userId: 0, name: "", email: "", password: "" };
+  return { userId: "", name: "", email: "", password: "" };
 }
 
 export const CreateUserResponse: MessageFns<CreateUserResponse> = {
   encode(message: CreateUserResponse, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
-    if (message.userId !== 0) {
-      writer.uint32(8).int32(message.userId);
+    if (message.userId !== "") {
+      writer.uint32(10).string(message.userId);
     }
     if (message.name !== "") {
       writer.uint32(18).string(message.name);
@@ -155,11 +155,11 @@ export const CreateUserResponse: MessageFns<CreateUserResponse> = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1: {
-          if (tag !== 8) {
+          if (tag !== 10) {
             break;
           }
 
-          message.userId = reader.int32();
+          message.userId = reader.string();
           continue;
         }
         case 2: {
@@ -197,7 +197,7 @@ export const CreateUserResponse: MessageFns<CreateUserResponse> = {
 
   fromJSON(object: any): CreateUserResponse {
     return {
-      userId: isSet(object.userId) ? globalThis.Number(object.userId) : 0,
+      userId: isSet(object.userId) ? globalThis.String(object.userId) : "",
       name: isSet(object.name) ? globalThis.String(object.name) : "",
       email: isSet(object.email) ? globalThis.String(object.email) : "",
       password: isSet(object.password) ? globalThis.String(object.password) : "",
@@ -206,8 +206,8 @@ export const CreateUserResponse: MessageFns<CreateUserResponse> = {
 
   toJSON(message: CreateUserResponse): unknown {
     const obj: any = {};
-    if (message.userId !== 0) {
-      obj.userId = Math.round(message.userId);
+    if (message.userId !== "") {
+      obj.userId = message.userId;
     }
     if (message.name !== "") {
       obj.name = message.name;
@@ -226,7 +226,7 @@ export const CreateUserResponse: MessageFns<CreateUserResponse> = {
   },
   fromPartial<I extends Exact<DeepPartial<CreateUserResponse>, I>>(object: I): CreateUserResponse {
     const message = createBaseCreateUserResponse();
-    message.userId = object.userId ?? 0;
+    message.userId = object.userId ?? "";
     message.name = object.name ?? "";
     message.email = object.email ?? "";
     message.password = object.password ?? "";

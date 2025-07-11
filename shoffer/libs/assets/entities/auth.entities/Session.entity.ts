@@ -2,11 +2,11 @@ import { Column, Entity, PrimaryColumn, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity()
 export class Session{
-    @PrimaryGeneratedColumn()
-    sessionId:number
+    @PrimaryGeneratedColumn('uuid')
+    sessionId:string
 
     @Column()
-    userId:number
+    userId:string
     
     @Column()
     name:string

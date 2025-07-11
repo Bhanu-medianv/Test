@@ -1,7 +1,7 @@
 import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
 import { UserCommand } from './commands.impl';
 import { Repository } from 'typeorm';
-import { User } from '../entities/user-created.entity';
+import { User } from '../../../../../libs/assets/entities/user.entities/user-created.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { ClientGrpc } from '@nestjs/microservices';
 import { Inject, OnModuleInit } from '@nestjs/common';
@@ -27,7 +27,8 @@ export class CreateCommand
   }
 
   async execute(command: UserCommand): Promise<any> {
-    const newUser = this.userRepository.create(command.createUserCreatedDto);
+    const new_uuid = crypto.randomUUID()
+    const newUser = this.userRepository.create({userId:new_uuid , ...command.createUserCreatedDto});
     await this.userRepository.save(newUser);
     console.log(newUser.userId , newUser.name)
     await lastValueFrom(

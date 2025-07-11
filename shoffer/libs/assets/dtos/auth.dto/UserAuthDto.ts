@@ -2,7 +2,7 @@ import { IsEmail, IsNumber, IsString, Matches, MinLength } from "class-validator
 
 export class UserAuthDto{
             @IsNumber()
-            userId:number
+            userId:string
 
             @IsString()
             name:string

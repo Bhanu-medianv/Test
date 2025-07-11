@@ -4,13 +4,13 @@ import { UserCreatedController } from './user-created.controller';
 import { CqrsModule } from '@nestjs/cqrs';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { CreateCommand } from './commands/commands.handler';
-import { User } from './entities/user-created.entity';
+import { User } from '../../../../libs/assets/entities/user.entities/user-created.entity';
 import { QueryIMPL } from './queries/queries.impl';
 import { Queryhand } from './queries/queries.handler';
 import { ClientsModule, Transport } from '@nestjs/microservices';
 import { join } from 'path';
 import { CacheModule } from '@nestjs/cache-manager';
-import { UserSession } from './entities/user.session.rename';
+import { UserSession } from '../../../../libs/assets/entities/user.entities/user.session.rename';
 import { UserSessionHandler } from './commands/session.handler';
 
 @Module({

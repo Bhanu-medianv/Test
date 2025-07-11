@@ -1,12 +1,12 @@
 import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
 import { LoginService } from './login.service';
-import { CreateLoginDto } from './dto/create-login.dto';
+import { CreateLoginDto } from '../../../../libs/assets/dtos/auth.dto/create-login.dto';
 import { CommandBus } from '@nestjs/cqrs';
 import { GrpcMethod } from '@nestjs/microservices';
 import { LoginCommandImpl,  } from './commands/login.command.Impl';
 import { LoginUserImpl } from './commands/loginuser.impl';
 
-@Controller('login')
+@Controller('account')
 export class LoginController {
   constructor(private readonly loginService: LoginService,
               private readonly commandBus :CommandBus
@@ -14,7 +14,7 @@ export class LoginController {
   ) {}
 
   @GrpcMethod('UserService' , 'CreateUser')  
-  async syncUser(data:{userId:number ,name:string;email:string;password:string}){
+  async syncUser(data:{userId:string ,name:string;email:string;password:string}){
     const userInfo = {
       userId:data.userId,
       name:data.name,
@@ -28,11 +28,11 @@ export class LoginController {
         password: result.password,
     }
   }
-  @Post()
+  @Post('login')
   loginUser(@Body() loginDto:CreateLoginDto){
     return this.commandBus.execute(new LoginUserImpl(loginDto))
   }
- 
+  
       
 }
 

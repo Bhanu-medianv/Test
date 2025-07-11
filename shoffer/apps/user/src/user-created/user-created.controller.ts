@@ -1,6 +1,6 @@
 import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
 import { UserCreatedService } from './user-created.service';
-import { CreateUserCreatedDto } from './dto/create-user-created.dto';
+import { CreateUserCreatedDto } from '../../../../libs/assets/dtos/user.dto/create-user-created.dto';
 import { CommandBus, QueryBus } from '@nestjs/cqrs';
 import { UserCommand, UserSessionImpl } from './commands/commands.impl';
 import { QueryIMPL } from './queries/queries.impl';
@@ -25,7 +25,6 @@ export class UserCreatedController {
   //session data comming from auth 
   @MessagePattern('session-creates')
   createSession(@Payload() message:any){
-
     const sessionData = message
     return this.commandBus.execute(new UserSessionImpl(sessionData))
     

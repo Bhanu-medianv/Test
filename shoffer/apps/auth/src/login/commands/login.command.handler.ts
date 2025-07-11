@@ -1,7 +1,7 @@
 import { CommandHandler, ICommandHandler } from "@nestjs/cqrs";
 import { LoginCommandImpl,  } from "./login.command.Impl";
 import { InjectRepository } from "@nestjs/typeorm";
-import { AuthUser } from "../entities/Authuser.entity";
+import { AuthUser } from "../../../../../libs/assets/entities/auth.entities/Authuser.entity";
 import { Repository } from "typeorm";
 
 @CommandHandler(LoginCommandImpl)

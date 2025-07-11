@@ -2,7 +2,7 @@ import { CommandHandler, ICommandHandler } from "@nestjs/cqrs";
 import { UserSessionImpl } from "./commands.impl";
 import { InjectRepository } from "@nestjs/typeorm";
 import { Repository } from "typeorm";
-import { UserSession } from "../entities/user.session.rename";
+import { UserSession } from "../../../../../libs/assets/entities/user.entities/user.session.rename";
 
 @CommandHandler(UserSessionImpl)
 export class UserSessionHandler implements ICommandHandler<UserSessionImpl>{

@@ -1,8 +1,8 @@
 import { IsEmail, IsNumber, IsString, Matches, MinLength } from "class-validator"
 
-export class SessionDto{
+export class UserSessionDto{
                 @IsNumber()
-                userId:number
+                userId:string
     
                 @IsString()
                 name:string

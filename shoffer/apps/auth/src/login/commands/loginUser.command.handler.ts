@@ -1,9 +1,9 @@
 import { CommandHandler, ICommandHandler } from "@nestjs/cqrs";
 import { InjectRepository } from "@nestjs/typeorm";
-import { AuthUser } from "../entities/Authuser.entity";
+import { AuthUser } from "../../../../../libs/assets/entities/auth.entities/Authuser.entity";
 import { Repository } from "typeorm";
 import { Inject, NotFoundException, UnauthorizedException } from "@nestjs/common";
-import { Session } from "../entities/Session.entity";
+import { Session } from "../../../../../libs/assets/entities/auth.entities/Session.entity";
 import { ClientKafka } from "@nestjs/microservices";
 import { LoginUserImpl } from "./loginuser.impl";
 

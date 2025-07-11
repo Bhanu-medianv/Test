@@ -1,4 +1,4 @@
-import { CreateLoginDto } from "../dto/create-login.dto";
+import { CreateLoginDto } from "../../../../../libs/assets/dtos/auth.dto/create-login.dto";
 
 export class LoginUserImpl{
     
